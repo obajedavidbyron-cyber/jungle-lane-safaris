@@ -1,0 +1,6 @@
+{
+  "name": "Jungle Lane Safaris",
+  "description": "Authentic Kenya Wildlife Safaris, Tailor-Made East Africa Tours, Day Excursions & Luxury Safaris.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

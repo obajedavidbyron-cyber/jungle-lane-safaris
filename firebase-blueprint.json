@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role-based access control",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 256 },
+        "display_name": { "type": "string", "maxLength": 128 },
+        "profile_pic": { "type": "string", "maxLength": 1024 },
+        "created_at": { "type": "string", "maxLength": 64 },
+        "role": { "type": "string", "enum": ["user", "admin"] }
+      },
+      "required": ["user_id", "email", "display_name", "created_at", "role"]
+    },
+    "Destination": {
+      "title": "Destination / Attraction",
+      "description": "Touristic destination or attraction with rich metadata and geo-coordinates",
+      "type": "object",
+      "properties": {
+        "attraction_id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 256 },
+        "slug": { "type": "string", "pattern": "^[a-z0-9-]+$", "maxLength": 128 },
+        "category": { "type": "string", "enum": ["Landmark", "Restaurant", "Nature", "Museum", "Activity"] },
+        "description": { "type": "string", "maxLength": 4000 },
+        "location": {
+          "type": "object",
+          "properties": {
+            "city": { "type": "string", "maxLength": 128 },
+            "country": { "type": "string", "maxLength": 128 },
+            "latitude": { "type": "number" },
+            "longitude": { "type": "number" },
+            "address": { "type": "string", "maxLength": 512 }
+          },
+          "required": ["city", "country", "latitude", "longitude"]
+        },
+        "images": { "type": "array" },
+        "opening_hours": { "type": "string", "maxLength": 256 },
+        "website_url": { "type": "string", "maxLength": 1024 },
+        "phone_number": { "type": "string", "maxLength": 64 },
+        "direct_directions_url": { "type": "string", "maxLength": 1024 },
+        "average_rating": { "type": "number" },
+        "review_count": { "type": "number" },
+        "is_featured": { "type": "boolean" },
+        "tags": { "type": "array" }
+      },
+      "required": ["attraction_id", "name", "slug", "category", "description", "location", "images", "tags"]
+    },
+    "Itinerary": {
+      "title": "Itinerary / Saved Spots",
+      "description": "User created custom safari and travel itinerary containing structured attraction items",
+      "type": "object",
+      "properties": {
+        "itinerary_id": { "type": "string", "maxLength": 128 },
+        "user_id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "is_public": { "type": "boolean" },
+        "created_at": { "type": "string", "maxLength": 64 },
+        "updated_at": { "type": "string", "maxLength": 64 },
+        "items": { "type": "array" }
+      },
+      "required": ["itinerary_id", "user_id", "title", "is_public", "created_at", "updated_at", "items"]
+    },
+    "AnalyticsEvent": {
+      "title": "Analytics & Traffic Event",
+      "description": "Real-time telemetry event for visitor interactions, page views, and conversions",
+      "type": "object",
+      "properties": {
+        "event_id": { "type": "string", "maxLength": 128 },
+        "user_id": { "type": "string", "maxLength": 128 },
+        "session_id": { "type": "string", "maxLength": 128 },
+        "event_type": { "type": "string", "enum": ["page_view", "outbound_click", "bookmark", "search"] },
+        "target_entity_id": { "type": "string", "maxLength": 256 },
+        "metadata": { "type": "object" },
+        "timestamp": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["event_id", "session_id", "event_type", "target_entity_id", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile records indexed by auth UID"
+    },
+    "/destinations/{attractionId}": {
+      "schema": "Destination",
+      "description": "Touristic destinations and attractions repository"
+    },
+    "/itineraries/{itineraryId}": {
+      "schema": "Itinerary",
+      "description": "Saved travel plans and customized itineraries"
+    },
+    "/analytics_events/{eventId}": {
+      "schema": "AnalyticsEvent",
+      "description": "High-volume tourist telemetry and click audit logs"
+    }
+  }
+}
