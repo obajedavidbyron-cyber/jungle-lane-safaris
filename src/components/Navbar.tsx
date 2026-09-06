@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>{CONTACT_INFO.email}</span>
             </a>
             <span className="hidden lg:inline text-stone-300">
-              • Licensed KATO Member & Local Kenyan Guides
+              • Licensed Local Kenyan Guides & Wildlife Specialists
             </span>
           </div>
 

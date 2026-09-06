@@ -13,9 +13,8 @@ export const ItineraryModal: React.FC<ItineraryModalProps> = ({ pkg, onClose, on
   if (!pkg) return null;
 
   const [guests, setGuests] = useState(2);
-  const estimatedTotalUSD = pkg.priceFromUSD * guests;
 
-  const whatsappMessage = `Jambo Jungle Lane Safaris! I want to inquire/book the "${pkg.title}" for ${guests} traveler(s). Estimated Total: $${estimatedTotalUSD}. Please send me available dates and custom booking details.`;
+  const whatsappMessage = `Jambo Jungle Lane Safaris! I want to inquire about the "${pkg.title}" for ${guests} traveler(s). Please send me available dates and custom proposal details.`;
 
   return (
     <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
@@ -65,20 +64,19 @@ export const ItineraryModal: React.FC<ItineraryModalProps> = ({ pkg, onClose, on
         {/* Modal Body */}
         <div className="p-6 sm:p-10 space-y-8">
           
-          {/* Price Estimator & Quick Inquire Strip */}
+          {/* Tailor-Made & Quick Inquire Strip */}
           <div className="bg-[#3A4F41] text-white p-6 rounded-sm shadow-md flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <span className="text-xs text-stone-300 uppercase tracking-widest font-bold block">
-                Package Price Starting From
+                Tailor-Made Safari Experience
               </span>
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-serif font-bold text-amber-300">
-                  ${pkg.priceFromUSD}
+              <div className="flex items-baseline gap-2 mt-0.5">
+                <span className="text-2xl sm:text-3xl font-serif font-bold text-amber-300">
+                  Custom Quote on Request
                 </span>
-                <span className="text-xs text-stone-300">/ person (twin sharing)</span>
               </div>
-              <span className="text-[11px] text-[#E29578] font-bold uppercase tracking-wider">
-                100% Tailor-Made & Price Guarantee
+              <span className="text-[11px] text-[#E29578] font-bold uppercase tracking-wider block mt-0.5">
+                Personalized to your travel dates, lodge preference & group size
               </span>
             </div>
 
@@ -92,7 +90,7 @@ export const ItineraryModal: React.FC<ItineraryModalProps> = ({ pkg, onClose, on
               >
                 {[1, 2, 3, 4, 5, 6, 8, 10].map((num) => (
                   <option key={num} value={num}>
-                    {num} Guest{num > 1 ? 's' : ''} (${pkg.priceFromUSD * num})
+                    {num} Guest{num > 1 ? 's' : ''}
                   </option>
                 ))}
               </select>

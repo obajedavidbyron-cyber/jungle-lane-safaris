@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Send, MessageSquare, CheckCircle2, Compass, Calendar, Users, MapPin } from 'lucide-react';
 import { CONTACT_INFO } from '../data/safariData';
+import { tracker } from '../lib/tracker';
 
 interface CustomQuoteModalProps {
   isOpen: boolean;
@@ -47,6 +48,11 @@ export const CustomQuoteModal: React.FC<CustomQuoteModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    tracker.quoteSubmit(
+      preselectedPackage || selectedParks.join(', '),
+      selectedParks.length,
+      travelStyle
+    );
     setSubmitted(true);
   };
 
@@ -106,6 +112,7 @@ Please provide a custom proposal!`;
                 href={generateWhatsAppMessage()}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => tracker.outboundClick('Quote Inquiry Direct', 'WhatsApp', generateWhatsAppMessage())}
                 className="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 px-4 rounded-sm font-bold text-xs uppercase tracking-widest shadow flex items-center justify-center gap-2"
               >
                 <MessageSquare className="w-4 h-4" />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, Sparkles, MessageSquare, Compass, CheckCircle2, Loader2, Calendar, MapPin } from 'lucide-react';
+import { X, Sparkles, MessageSquare, Compass, CheckCircle2, Loader2, Calendar, MapPin, Info } from 'lucide-react';
 import { CONTACT_INFO } from '../data/safariData';
+import { tracker } from '../lib/tracker';
 
 interface AIPlannerModalProps {
   isOpen: boolean;
@@ -56,12 +57,12 @@ export const AIPlannerModal: React.FC<AIPlannerModalProps> = ({ isOpen, onClose 
       const data = await res.json();
       if (data.itinerary) {
         setGeneratedItinerary(data.itinerary);
+        tracker.aiItineraryGenerated(destinations, style);
       } else {
         // Fallback proposal if API key is not active
-        setGeneratedItinerary({
+        const fallback = {
           title: `Custom ${duration} ${destinations.join(' & ')} Safari Proposal`,
           summary: `A tailor-made East Africa safari experience combining wildlife tracking in ${destinations.join(', ')} with professional native Maasai driver guides.`,
-          estimatedPricePerPersonUSD: style === 'Luxury' ? 1850 : style === 'Mid-Range' ? 880 : 540,
           recommendedLodging: style === 'Luxury' ? 'Luxury Tented Camps with Private Plunge Pools' : 'Eco-Safari Tented Camps & Lodges',
           bestTime: 'June to October & December to March',
           highlights: [
@@ -77,7 +78,9 @@ export const AIPlannerModal: React.FC<AIPlannerModalProps> = ({ isOpen, onClose 
           ],
           inclusions: ['Private 4x4 Land Cruiser', 'Park entry fees', 'Full board meals', 'English/Swahili driver guide'],
           exclusions: ['International flights', 'Tips & personal items']
-        });
+        };
+        setGeneratedItinerary(fallback);
+        tracker.aiItineraryGenerated(destinations, style);
       }
     } catch (err) {
       console.error(err);
@@ -244,8 +247,8 @@ export const AIPlannerModal: React.FC<AIPlannerModalProps> = ({ isOpen, onClose 
                   <span className="text-xs font-bold text-[#E29578] uppercase tracking-wider">
                     Custom Proposal Generated
                   </span>
-                  <span className="text-xl font-serif font-bold text-amber-300">
-                    Est. ${generatedItinerary.estimatedPricePerPersonUSD} / person
+                  <span className="text-xs font-bold text-amber-300 uppercase tracking-wider bg-white/10 px-3 py-1 rounded-xs">
+                    Tailor-Made Proposal
                   </span>
                 </div>
                 <h3 className="text-xl font-serif font-bold text-white">
@@ -297,6 +300,7 @@ export const AIPlannerModal: React.FC<AIPlannerModalProps> = ({ isOpen, onClose 
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => tracker.outboundClick('AI Proposal WhatsApp', 'WhatsApp', `${CONTACT_INFO.whatsappUrl}`)}
                   className="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-sm font-bold text-xs uppercase tracking-widest shadow flex items-center justify-center gap-2"
                 >
                   <MessageSquare className="w-4 h-4" />

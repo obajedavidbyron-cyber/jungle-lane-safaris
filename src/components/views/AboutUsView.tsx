@@ -48,7 +48,7 @@ export const AboutUsView: React.FC<AboutUsViewProps> = ({ onOpenQuoteModal }) =>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#2E4057]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Active Member of Kenya Association of Tour Operators (KATO)</span>
+                <span>Certified Native Kenyan Professional Safari Guides & Wildlife Trackers</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#2E4057]">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />

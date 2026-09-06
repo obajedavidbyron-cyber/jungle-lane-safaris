@@ -3,6 +3,23 @@ import { DestinationDoc, ItineraryDoc, ItineraryItem, UserDoc, AnalyticsEventDoc
 const API_BASE = '/api';
 
 /**
+ * Retrieve admin authorization header if authenticated
+ */
+export function getAdminAuthHeader(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  try {
+    const raw = localStorage.getItem('jls_admin_auth_session');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed?.token) {
+        return { Authorization: `Bearer ${parsed.token}` };
+      }
+    }
+  } catch {}
+  return {};
+}
+
+/**
  * Generate or retrieve persistent client session ID
  */
 function getClientSessionId(): string {
@@ -73,7 +90,10 @@ export const destinationApi = {
   async create(payload: Partial<DestinationDoc>): Promise<DestinationDoc> {
     const res = await fetch(`${API_BASE}/destinations`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...getAdminAuthHeader()
+      },
       body: JSON.stringify(payload)
     });
     const json = await res.json();
@@ -89,7 +109,10 @@ export const destinationApi = {
   async update(id: string, updates: Partial<DestinationDoc>): Promise<DestinationDoc> {
     const res = await fetch(`${API_BASE}/destinations/${id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...getAdminAuthHeader()
+      },
       body: JSON.stringify(updates)
     });
     const json = await res.json();
@@ -104,7 +127,10 @@ export const destinationApi = {
    */
   async delete(id: string): Promise<boolean> {
     const res = await fetch(`${API_BASE}/destinations/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        ...getAdminAuthHeader()
+      }
     });
     return res.ok;
   }
@@ -207,7 +233,10 @@ export const itineraryApi = {
 
   async delete(itineraryId: string): Promise<boolean> {
     const res = await fetch(`${API_BASE}/itineraries/${itineraryId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        ...getAdminAuthHeader()
+      }
     });
     return res.ok;
   }
@@ -266,19 +295,27 @@ export function logEvent(
 }
 
 // =========================================================================
-// 4. USERS DATA ACCESS SERVICE
+// 4. USERS DATA ACCESS SERVICE (Admin Protected)
 // =========================================================================
 
 export const userApi = {
   async fetchAll(): Promise<UserDoc[]> {
-    const res = await fetch(`${API_BASE}/users`);
+    const res = await fetch(`${API_BASE}/users`, {
+      headers: {
+        ...getAdminAuthHeader()
+      }
+    });
     if (!res.ok) throw new Error('Failed to fetch users');
     const json = await res.json();
     return json.users || [];
   },
 
   async fetchByIdOrEmail(idOrEmail: string): Promise<UserDoc | null> {
-    const res = await fetch(`${API_BASE}/users/${encodeURIComponent(idOrEmail)}`);
+    const res = await fetch(`${API_BASE}/users/${encodeURIComponent(idOrEmail)}`, {
+      headers: {
+        ...getAdminAuthHeader()
+      }
+    });
     if (res.status === 404) return null;
     if (!res.ok) throw new Error('Failed to fetch user');
     const json = await res.json();
@@ -288,7 +325,10 @@ export const userApi = {
   async create(payload: Partial<UserDoc>): Promise<UserDoc> {
     const res = await fetch(`${API_BASE}/users`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...getAdminAuthHeader()
+      },
       body: JSON.stringify(payload)
     });
     const json = await res.json();
@@ -299,7 +339,10 @@ export const userApi = {
   async update(id: string, updates: Partial<UserDoc>): Promise<UserDoc> {
     const res = await fetch(`${API_BASE}/users/${id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...getAdminAuthHeader()
+      },
       body: JSON.stringify(updates)
     });
     const json = await res.json();
@@ -309,14 +352,17 @@ export const userApi = {
 
   async delete(id: string): Promise<boolean> {
     const res = await fetch(`${API_BASE}/users/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        ...getAdminAuthHeader()
+      }
     });
     return res.ok;
   }
 };
 
 // =========================================================================
-// 5. DATABASE SEEDING & STATUS SERVICE
+// 5. DATABASE SEEDING & STATUS SERVICE (Admin Protected)
 // =========================================================================
 
 export const databaseAdminApi = {
@@ -327,8 +373,122 @@ export const databaseAdminApi = {
   },
 
   async seedDatabase(): Promise<any> {
-    const res = await fetch(`${API_BASE}/db/seed`, { method: 'POST' });
-    if (!res.ok) throw new Error('Failed to seed database');
+    const res = await fetch(`${API_BASE}/db/seed`, {
+      method: 'POST',
+      headers: {
+        ...getAdminAuthHeader()
+      }
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to seed database');
+    }
+    return res.json();
+  }
+};
+
+// =========================================================================
+// 6. AUTHENTICATION & SECURITY SHIELD API
+// =========================================================================
+
+export const authApi = {
+  async login(email: string, passcode: string): Promise<{
+    success: boolean;
+    token?: string;
+    expiresIn?: number;
+    user?: { email: string; name: string; role: 'admin' };
+    error?: string;
+  }> {
+    const res = await fetch(`${API_BASE}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, passcode })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'Authentication failed');
+    }
+    return data;
+  },
+
+  async verify(token: string): Promise<{ valid: boolean; user?: any }> {
+    const res = await fetch(`${API_BASE}/auth/verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    });
+    return res.json();
+  },
+
+  async logout(token: string): Promise<void> {
+    await fetch(`${API_BASE}/auth/logout`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    }).catch(() => {});
+  }
+};
+
+export const securityApi = {
+  async getStatus(): Promise<{
+    success: boolean;
+    status: {
+      status: string;
+      firewall: string;
+      rateLimiter: string;
+      xssSanitizer: string;
+      tokenEngine: string;
+      activeSessions: number;
+      blockedIpsCount: number;
+      securityEventsCount: number;
+      summaryStats: Record<string, number>;
+      timestamp: string;
+    };
+  }> {
+    const res = await fetch(`${API_BASE}/security/status`, {
+      headers: {
+        ...getAdminAuthHeader()
+      }
+    });
+    if (!res.ok) throw new Error('Failed to fetch security status');
+    return res.json();
+  },
+
+  async getAuditLog(limit = 100, type?: string): Promise<{
+    success: boolean;
+    events: Array<{
+      id: string;
+      timestamp: string;
+      type: string;
+      ip: string;
+      path: string;
+      method: string;
+      details: string;
+      severity: 'low' | 'medium' | 'high' | 'critical';
+    }>;
+    total: number;
+    summary: Record<string, number>;
+  }> {
+    const query = new URLSearchParams();
+    if (limit) query.set('limit', String(limit));
+    if (type) query.set('type', type);
+    const res = await fetch(`${API_BASE}/security/audit-log?${query.toString()}`, {
+      headers: {
+        ...getAdminAuthHeader()
+      }
+    });
+    if (!res.ok) throw new Error('Failed to fetch security audit log');
+    return res.json();
+  },
+
+  async flushBlockedIPs(): Promise<{ success: boolean; message: string }> {
+    const res = await fetch(`${API_BASE}/security/flush-blocked-ips`, {
+      method: 'POST',
+      headers: {
+        ...getAdminAuthHeader()
+      }
+    });
+    if (!res.ok) throw new Error('Failed to flush blocked IPs');
     return res.json();
   }
 };

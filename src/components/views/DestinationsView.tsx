@@ -90,26 +90,6 @@ export const DestinationsView: React.FC<DestinationsViewProps> = ({ onOpenQuoteM
     }
   };
 
-  const handleDirectionsClick = (dest: DestinationDoc) => {
-    if (dest.direct_directions_url) {
-      tracker.outboundClick(dest.name, 'Directions/Map', dest.direct_directions_url);
-      window.open(dest.direct_directions_url, '_blank', 'noopener,noreferrer');
-    }
-  };
-
-  const handlePhoneClick = (dest: DestinationDoc) => {
-    if (dest.phone_number) {
-      tracker.outboundClick(dest.name, 'Phone', `tel:${dest.phone_number}`);
-      window.location.href = `tel:${dest.phone_number}`;
-    }
-  };
-
-  const handleWebsiteClick = (dest: DestinationDoc) => {
-    if (dest.website_url) {
-      tracker.outboundClick(dest.name, 'Partner Lodge', dest.website_url);
-      window.open(dest.website_url, '_blank', 'noopener,noreferrer');
-    }
-  };
 
   return (
     <div className="py-12 sm:py-20 px-4 sm:px-8 bg-[#F9F6F0] min-h-screen">
@@ -340,34 +320,41 @@ export const DestinationsView: React.FC<DestinationsViewProps> = ({ onOpenQuoteM
                     {/* Outbound referral links */}
                     <div className="flex flex-wrap items-center gap-2 text-xs">
                       {dest.direct_directions_url && (
-                        <button
-                          onClick={() => handleDirectionsClick(dest)}
+                        <a
+                          href={dest.direct_directions_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => tracker.outboundClick(dest.name, 'Directions/Map', dest.direct_directions_url)}
                           className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xs font-bold flex items-center gap-1 transition-colors"
                           title="Get Google Maps Directions"
                         >
                           <Compass className="w-3.5 h-3.5 text-blue-600" />
                           <span>Directions</span>
-                        </button>
+                        </a>
                       )}
                       {dest.phone_number && (
-                        <button
-                          onClick={() => handlePhoneClick(dest)}
+                        <a
+                          href={`tel:${dest.phone_number}`}
+                          onClick={() => tracker.outboundClick(dest.name, 'Phone', `tel:${dest.phone_number}`)}
                           className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xs font-bold flex items-center gap-1 transition-colors"
                           title="Call venue direct"
                         >
                           <Phone className="w-3.5 h-3.5 text-emerald-600" />
                           <span>Call Venue</span>
-                        </button>
+                        </a>
                       )}
                       {dest.website_url && (
-                        <button
-                          onClick={() => handleWebsiteClick(dest)}
+                        <a
+                          href={dest.website_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => tracker.outboundClick(dest.name, 'Partner Lodge', dest.website_url)}
                           className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xs font-bold flex items-center gap-1 transition-colors"
                           title="Visit official website / partner portal"
                         >
                           <ExternalLink className="w-3.5 h-3.5 text-purple-600" />
                           <span>Partner Link</span>
-                        </button>
+                        </a>
                       )}
                     </div>
 

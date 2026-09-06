@@ -154,13 +154,12 @@ export const FeaturedPackages: React.FC<FeaturedPackagesProps> = ({
                     </span>
                   </div>
 
-                  {/* Price Tag Overlay */}
-                  <div className="absolute bottom-4 right-4 bg-[#3A4F41]/90 backdrop-blur-md px-4 py-1.5 rounded-sm border border-white/20 text-white text-right">
-                    <span className="block text-[10px] text-stone-300 uppercase font-bold tracking-wider">From</span>
-                    <span className="text-xl sm:text-2xl font-bold font-serif text-amber-300">
-                      ${pkg.priceFromUSD}
+                  {/* Tailor-Made Badge Overlay */}
+                  <div className="absolute bottom-4 right-4 bg-[#3A4F41]/90 backdrop-blur-md px-3.5 py-1.5 rounded-sm border border-white/20 text-white text-right">
+                    <span className="text-xs font-bold text-amber-300 uppercase tracking-wider block">
+                      Custom Quote
                     </span>
-                    <span className="text-[10px] text-stone-300"> / person</span>
+                    <span className="text-[10px] text-stone-300">Tailor-Made Safari</span>
                   </div>
 
                   {/* Duration Badge */}

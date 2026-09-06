@@ -23,9 +23,12 @@ export default function App() {
   const [currentTab, setCurrentTab] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname;
-      const hash = window.location.hash;
-      if (path === '/admin' || hash === '#admin' || hash === '#/admin' || path === '/analytics' || hash === '#analytics' || hash === '#owner-analytics') {
+      const rawHash = window.location.hash.replace(/^#\/?/, '');
+      if (path === '/admin' || rawHash === 'admin' || path === '/analytics' || rawHash === 'analytics' || rawHash === 'owner-analytics') {
         return 'admin';
+      }
+      if (['home', 'day-excursions', 'multi-day', 'destinations', 'about', 'blog', 'contact'].includes(rawHash)) {
+        return rawHash;
       }
     }
     return 'home';
@@ -44,26 +47,39 @@ export default function App() {
     tracker.pageView(currentTab);
     if (currentTab === 'admin') {
       window.history.replaceState(null, '', '#admin');
-    } else if (window.location.hash === '#admin' || window.location.hash === '#analytics') {
-      window.history.replaceState(null, '', window.location.pathname);
+    } else if (currentTab === 'home') {
+      if (window.location.hash && window.location.hash !== '#home') {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    } else {
+      window.history.replaceState(null, '', `#${currentTab}`);
     }
   }, [currentTab]);
 
   // Listen to popstate / hash change
   useEffect(() => {
     const handleHashChange = () => {
+      const rawHash = window.location.hash.replace(/^#\/?/, '');
       if (
-        window.location.hash === '#admin' ||
+        rawHash === 'admin' ||
         window.location.pathname === '/admin' ||
-        window.location.hash === '#analytics' ||
-        window.location.hash === '#owner-analytics' ||
+        rawHash === 'analytics' ||
+        rawHash === 'owner-analytics' ||
         window.location.pathname === '/analytics'
       ) {
         setCurrentTab('admin');
+      } else if (['home', 'day-excursions', 'multi-day', 'destinations', 'about', 'blog', 'contact'].includes(rawHash)) {
+        setCurrentTab(rawHash);
+      } else if (!rawHash) {
+        setCurrentTab('home');
       }
     };
     window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
   }, []);
 
   const handleOpenQuoteModal = (packageTitle?: string) => {

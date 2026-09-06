@@ -54,8 +54,8 @@ export const SAFARI_PACKAGES: SafariPackage[] = [
     ],
     exclusions: [
       'International airfare & visa fees',
-      'Optional Hot Air Balloon Safari ($450 per person)',
-      'Optional Maasai Village Cultural Tour ($30 per person)',
+      'Optional Hot Air Balloon Safari (upon request)',
+      'Optional Maasai Village Cultural Tour (upon request)',
       'Personal expenses & driver tips'
     ]
   },
@@ -124,7 +124,7 @@ export const SAFARI_PACKAGES: SafariPackage[] = [
       'Bottled water on game drives'
     ],
     exclusions: [
-      'Bicycle hire at Hell’s Gate ($15)',
+      'Bicycle hire at Hell’s Gate (optional)',
       'Tips and personal items',
       'Visas and travel insurance'
     ]
@@ -431,11 +431,11 @@ Due to high demand during migration season (July–October), luxury and mid-rang
     imageUrl: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80',
     content: `One of the most common questions from travelers is choosing between mid-range safari tented camps and ultra-luxury lodges.
 
-### Mid-Range Tented Camps ($250 - $450 / night per person)
+### Mid-Range Tented Camps
 - **Features:** Ensuite bathrooms with hot flush toilets and hot showers, comfortable king beds, gourmet buffet meals, generator electricity.
 - **Vibe:** Highly comfortable, authentic, great value for money.
 
-### Ultra-Luxury Camps ($800 - $1800 / night per person)
+### Ultra-Luxury Camps
 - **Features:** Private plunge pools, open canvas suites, butler service, fine dining wines, private conservancy game drives, complimentary laundry.
 - **Vibe:** Exclusive luxury immersion into remote wilderness.`
   }
@@ -480,8 +480,8 @@ export const CONTACT_INFO = {
   whatsappUrl: 'https://wa.me/254721700878',
   email: 'junglelanesafaristours@gmail.com',
   address: 'Kimathi Street, City Centre, Nairobi, Kenya',
-  katoLicence: 'KATO Member No. FE/542',
-  ktbLicence: 'Licensed by Kenya Tourism Authority (TRA)',
+  guideCert: 'Certified Professional Kenyan Safari Guides',
+  ktbLicence: 'Licensed by Tourism Regulatory Authority (TRA)',
   socials: {
     facebook: 'https://www.facebook.com/share/1BYyifq1Vv/',
     instagram: 'https://www.instagram.com/jungle_lane_safaris?igsh=MXZvcWdwbXZ5c3hnOQ==',

@@ -18,7 +18,7 @@ export const ContactUsView: React.FC = () => {
       a: 'Travelers to Kenya require an Electronic Travel Authorization (eTA) obtained online prior to departure at etakenya.go.ke. Yellow Fever vaccination is required if arriving from or transiting through endemic countries.'
     },
     {
-      q: 'What is included in Jungle Lane Safaris package prices?',
+      q: 'What is included in Jungle Lane Safaris tour packages?',
       a: 'All our multi-day packages include transport in private 4x4 Land Cruisers with pop-up roofs, full board accommodation, all park entrance fees, professional English/Swahili driver-guide services, and unlimited drinking water.'
     },
     {

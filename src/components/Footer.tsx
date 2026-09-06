@@ -44,11 +44,11 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, onOpenQuoteModal })
               JUNGLE LANE SAFARIS is a premier licensed Kenyan tour operator offering authentic, tailor-made wildlife safaris, day excursions, and beach holidays across East Africa.
             </p>
 
-            {/* KATO & Licensing Badges */}
+            {/* Licensing & Trust Badges */}
             <div className="pt-2 space-y-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-amber-300 bg-[#3A4F41]/60 p-2.5 rounded-sm border border-stone-600/50">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>{CONTACT_INFO.katoLicence}</span>
+                <span>{CONTACT_INFO.guideCert}</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-stone-300 bg-[#3A4F41]/60 p-2.5 rounded-sm border border-stone-600/50">
                 <Award className="w-4 h-4 text-[#C86D51] shrink-0" />
@@ -208,7 +208,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, onOpenQuoteModal })
             <span>•</span>
             <span className="hover:text-stone-200 cursor-pointer">Terms & Conditions</span>
             <span>•</span>
-            <span className="hover:text-stone-200 cursor-pointer">KATO Code of Conduct</span>
+            <span className="hover:text-stone-200 cursor-pointer">Eco-Safari Guidelines</span>
             <span>•</span>
             <button
               onClick={() => {

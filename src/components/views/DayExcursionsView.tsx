@@ -52,9 +52,8 @@ export const DayExcursionsView: React.FC<DayExcursionsViewProps> = ({
                     {pkg.tag}
                   </span>
                 </div>
-                <div className="absolute bottom-4 right-4 bg-[#2E4057]/90 text-white px-4 py-1.5 rounded-xl">
-                  <span className="text-xl font-serif font-bold text-amber-300">${pkg.priceFromUSD}</span>
-                  <span className="text-xs text-stone-300"> / person</span>
+                <div className="absolute bottom-4 right-4 bg-[#2E4057]/90 text-white px-3.5 py-1.5 rounded-xl">
+                  <span className="text-xs font-bold text-amber-300">Inquire for Details</span>
                 </div>
               </div>
 
