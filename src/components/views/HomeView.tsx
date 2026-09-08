@@ -4,6 +4,7 @@ import { StatsBanner } from '../StatsBanner';
 import { FeaturedPackages } from '../FeaturedPackages';
 import { WhyChooseUs } from '../WhyChooseUs';
 import { DestinationShowcase } from '../DestinationShowcase';
+import { CarHireSection } from '../CarHireSection';
 import { Testimonials } from '../Testimonials';
 import { CTABanner } from '../CTABanner';
 import { SafariPackage, FilterState } from '../../types';
@@ -12,6 +13,8 @@ interface HomeViewProps {
   onSelectPackage: (pkg: SafariPackage) => void;
   onOpenQuoteModal: (packageTitle?: string) => void;
   onOpenAIModal: () => void;
+  onNavigateCarHire?: () => void;
+  onOpenCarHireModal?: (vehicleId?: string) => void;
   activeSearchFilter?: FilterState;
   onSearchFilter: (filters: FilterState) => void;
 }
@@ -20,6 +23,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onSelectPackage,
   onOpenQuoteModal,
   onOpenAIModal,
+  onNavigateCarHire,
+  onOpenCarHireModal,
   activeSearchFilter,
   onSearchFilter
 }) => {
@@ -43,6 +48,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       <DestinationShowcase onOpenQuoteModal={onOpenQuoteModal} />
 
+      {onNavigateCarHire && onOpenCarHireModal && (
+        <CarHireSection
+          onNavigateCarHire={onNavigateCarHire}
+          onOpenCarHireModal={onOpenCarHireModal}
+        />
+      )}
+
       <Testimonials />
 
       <CTABanner
@@ -52,3 +64,4 @@ export const HomeView: React.FC<HomeViewProps> = ({
     </div>
   );
 };
+

@@ -8,10 +8,12 @@ import { DestinationsView } from './components/views/DestinationsView';
 import { AboutUsView } from './components/views/AboutUsView';
 import { BlogView } from './components/views/BlogView';
 import { ContactUsView } from './components/views/ContactUsView';
+import { CarHireView } from './components/views/CarHireView';
 import { AdminDashboardView } from './components/views/AdminDashboardView';
 
 import { ItineraryModal } from './components/ItineraryModal';
 import { CustomQuoteModal } from './components/CustomQuoteModal';
+import { CarHireQuoteModal } from './components/CarHireQuoteModal';
 import { AIPlannerModal } from './components/AIPlannerModal';
 
 import { SafariPackage, FilterState } from './types';
@@ -27,7 +29,7 @@ export default function App() {
       if (path === '/admin' || rawHash === 'admin' || path === '/analytics' || rawHash === 'analytics' || rawHash === 'owner-analytics') {
         return 'admin';
       }
-      if (['home', 'day-excursions', 'multi-day', 'destinations', 'about', 'blog', 'contact'].includes(rawHash)) {
+      if (['home', 'day-excursions', 'multi-day', 'car-hire', 'destinations', 'about', 'blog', 'contact'].includes(rawHash)) {
         return rawHash;
       }
     }
@@ -39,6 +41,9 @@ export default function App() {
   
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quotePackageTitle, setQuotePackageTitle] = useState<string | undefined>(undefined);
+
+  const [carHireModalOpen, setCarHireModalOpen] = useState(false);
+  const [carHireVehicleId, setCarHireVehicleId] = useState<string | undefined>(undefined);
 
   const [aiModalOpen, setAiModalOpen] = useState(false);
 
@@ -68,7 +73,7 @@ export default function App() {
         window.location.pathname === '/analytics'
       ) {
         setCurrentTab('admin');
-      } else if (['home', 'day-excursions', 'multi-day', 'destinations', 'about', 'blog', 'contact'].includes(rawHash)) {
+      } else if (['home', 'day-excursions', 'multi-day', 'car-hire', 'destinations', 'about', 'blog', 'contact'].includes(rawHash)) {
         setCurrentTab(rawHash);
       } else if (!rawHash) {
         setCurrentTab('home');
@@ -86,6 +91,12 @@ export default function App() {
     setQuotePackageTitle(packageTitle);
     setQuoteModalOpen(true);
     tracker.bookmarkItinerary(packageTitle || 'Custom Safari Proposal Request');
+  };
+
+  const handleOpenCarHireModal = (vehicleId?: string) => {
+    setCarHireVehicleId(vehicleId);
+    setCarHireModalOpen(true);
+    tracker.pageView(vehicleId ? `Car Hire Modal - ${vehicleId}` : 'Car Hire Modal');
   };
 
   const handleOpenAIModal = () => {
@@ -126,6 +137,8 @@ export default function App() {
             }}
             onOpenQuoteModal={handleOpenQuoteModal}
             onOpenAIModal={handleOpenAIModal}
+            onNavigateCarHire={() => setCurrentTab('car-hire')}
+            onOpenCarHireModal={handleOpenCarHireModal}
             activeSearchFilter={activeSearchFilter}
             onSearchFilter={handleSearchFilter}
           />
@@ -148,6 +161,13 @@ export default function App() {
               tracker.packageView(pkg.title, pkg.durationLabel, pkg.priceFromUSD);
             }}
             onOpenQuoteModal={handleOpenQuoteModal}
+          />
+        )}
+
+        {currentTab === 'car-hire' && (
+          <CarHireView
+            onOpenCarHireModal={handleOpenCarHireModal}
+            onOpenGeneralQuoteModal={() => handleOpenQuoteModal()}
           />
         )}
 
@@ -225,6 +245,12 @@ export default function App() {
         isOpen={quoteModalOpen}
         onClose={() => setQuoteModalOpen(false)}
         preselectedPackage={quotePackageTitle}
+      />
+
+      <CarHireQuoteModal
+        isOpen={carHireModalOpen}
+        onClose={() => setCarHireModalOpen(false)}
+        preselectedVehicleId={carHireVehicleId}
       />
 
       <AIPlannerModal

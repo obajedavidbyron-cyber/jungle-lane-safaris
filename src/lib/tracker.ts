@@ -93,10 +93,10 @@ export const tracker = {
     trackEvent('bookmark_itinerary', itineraryName, 'package', metadata);
   },
 
-  // Outbound link clicks (WhatsApp, Phone call, Partner lodge, Google Maps directions, etc.)
+  // Outbound link clicks (WhatsApp, Phone call, Email, Partner lodge, Google Maps directions, etc.)
   outboundClick: (
     entityName: string,
-    linkType: 'WhatsApp' | 'Phone' | 'Directions/Map' | 'Partner Lodge' | 'Park Permits' | 'Airline' | 'Other',
+    linkType: 'WhatsApp' | 'Phone' | 'Email' | 'Directions/Map' | 'Partner Lodge' | 'Park Permits' | 'Airline' | 'Other',
     targetUrl?: string,
     metadata?: Record<string, any>
   ) => {

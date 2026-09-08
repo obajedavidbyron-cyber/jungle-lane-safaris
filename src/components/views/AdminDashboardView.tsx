@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { JungleLaneLogo } from '../JungleLaneLogo';
 import {
   Compass,
   MapPin,
@@ -955,7 +956,8 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
               <span>/</span>
               <span>All-In-One Operations & Analytics</span>
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 flex items-center gap-2.5">
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 flex items-center gap-3">
+              <JungleLaneLogo size="sm" variant="emblem" theme="light" id="admin-header-logo" />
               <span>Jungle Lane Safaris Admin Hub</span>
               <span className="text-xs bg-emerald-800 text-emerald-200 px-2.5 py-0.5 rounded-full border border-emerald-600 font-sans font-semibold">
                 ● Live DAL Connected

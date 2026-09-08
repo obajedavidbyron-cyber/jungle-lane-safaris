@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Compass, Phone, Mail, MapPin, MessageSquare, Facebook, Instagram, Send, CheckCircle2, ShieldCheck, Award, Lock } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageSquare, Facebook, Instagram, Send, CheckCircle2, ShieldCheck, Award, Lock } from 'lucide-react';
 import { CONTACT_INFO } from '../data/safariData';
+import { JungleLaneLogo } from './JungleLaneLogo';
 
 interface FooterProps {
   onSelectTab: (tab: string) => void;
@@ -20,37 +21,27 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, onOpenQuoteModal })
   };
 
   return (
-    <footer className="bg-[#2D3E33] text-stone-300 pt-16 pb-8 border-t border-[#3A4F41]">
+    <footer className="bg-[#11291D] text-stone-300 pt-16 pb-8 border-t border-[#1C3D2B]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
         {/* Main 4-Column Footer Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Column 1: Company Bio & Licensing Badges */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#C86D51] text-white flex items-center justify-center font-bold shadow-md">
-                <Compass className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="block font-serif text-xl font-bold text-white leading-none uppercase tracking-wide">
-                  JUNGLE LANE
-                </span>
-                <span className="text-[10px] font-bold text-[#E29578] tracking-widest uppercase">
-                  SAFARIS & TOURS
-                </span>
-              </div>
+            <div className="pb-1">
+              <JungleLaneLogo size="md" variant="horizontal" theme="light" id="footer-brand-logo" />
             </div>
 
             <p className="text-xs text-stone-300 leading-relaxed">
-              JUNGLE LANE SAFARIS is a premier licensed Kenyan tour operator offering authentic, tailor-made wildlife safaris, day excursions, and beach holidays across East Africa.
+              JUNGLE LANE SAFARIS is a premier licensed Kenyan tour operator offering authentic, tailor-made wildlife safaris, day excursions, and 4x4 vehicle rental across East Africa.
             </p>
 
             {/* Licensing & Trust Badges */}
             <div className="pt-2 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-semibold text-amber-300 bg-[#3A4F41]/60 p-2.5 rounded-sm border border-stone-600/50">
+              <div className="flex items-center gap-2 text-xs font-semibold text-amber-300 bg-[#1A3828] p-2.5 rounded-sm border border-emerald-800/50">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>{CONTACT_INFO.guideCert}</span>
               </div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-stone-300 bg-[#3A4F41]/60 p-2.5 rounded-sm border border-stone-600/50">
+              <div className="flex items-center gap-2 text-xs font-semibold text-stone-200 bg-[#1A3828] p-2.5 rounded-sm border border-emerald-800/50">
                 <Award className="w-4 h-4 text-[#C86D51] shrink-0" />
                 <span>{CONTACT_INFO.ktbLicence}</span>
               </div>
@@ -67,6 +58,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, onOpenQuoteModal })
                 { id: 'home', label: 'Home Page' },
                 { id: 'day-excursions', label: 'Day Excursions' },
                 { id: 'multi-day', label: 'Multi-Day Safaris' },
+                { id: 'car-hire', label: 'Car Hire Services' },
                 { id: 'destinations', label: 'National Parks & Destinations' },
                 { id: 'about', label: 'About Us & Local Guides' },
                 { id: 'blog', label: 'Safari Travel Guide & Blog' },

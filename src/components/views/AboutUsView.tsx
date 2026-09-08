@@ -1,6 +1,7 @@
 import React from 'react';
 import { Compass, Users, ShieldCheck, Heart, Truck, Award, CheckCircle2 } from 'lucide-react';
 import { CONTACT_INFO, WHY_CHOOSE_US } from '../../data/safariData';
+import { JungleLaneLogo } from '../JungleLaneLogo';
 
 interface AboutUsViewProps {
   onOpenQuoteModal: () => void;
@@ -10,18 +11,23 @@ export const AboutUsView: React.FC<AboutUsViewProps> = ({ onOpenQuoteModal }) =>
   return (
     <div className="py-12 sm:py-20 px-4 sm:px-8 bg-[#F9F6F0] min-h-screen space-y-16">
       <div className="max-w-7xl mx-auto space-y-12">
-        {/* Banner */}
-        <div className="bg-[#2E4057] text-white p-8 sm:p-16 rounded-3xl relative overflow-hidden shadow-xl border border-[#3A4F68]">
-          <div className="relative z-10 max-w-3xl space-y-4">
-            <span className="bg-[#C86D51] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-              Explore Africa with Africans
-            </span>
-            <h1 className="text-3xl sm:text-5xl font-serif font-bold text-white leading-tight">
-              About Jungle Lane Safaris & Tours
-            </h1>
-            <p className="text-stone-300 text-base sm:text-lg leading-relaxed">
-              We are a fully licensed native Kenyan safari company based in Nairobi. Our passion is delivering authentic, tailor-made wildlife adventures across Kenya and East Africa.
-            </p>
+        {/* Banner with Official Brand Logo */}
+        <div className="bg-[#14422E] text-white p-8 sm:p-14 rounded-3xl relative overflow-hidden shadow-xl border border-emerald-800/40">
+          <div className="relative z-10 max-w-4xl flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+            <div className="bg-white/10 p-4 rounded-2xl backdrop-blur-sm border border-white/15 shrink-0">
+              <JungleLaneLogo size="lg" variant="stacked" theme="light" id="about-brand-logo" />
+            </div>
+            <div className="space-y-3">
+              <span className="bg-[#C86D51] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider inline-block">
+                Explore Africa with Africans
+              </span>
+              <h1 className="text-3xl sm:text-5xl font-serif font-bold text-white leading-tight">
+                About Jungle Lane Safaris
+              </h1>
+              <p className="text-emerald-100/90 text-base sm:text-lg leading-relaxed">
+                We are a premier licensed native Kenyan safari company based in Nairobi. Our passion is delivering authentic, tailor-made wildlife adventures across Kenya and East Africa.
+              </p>
+            </div>
           </div>
         </div>
 

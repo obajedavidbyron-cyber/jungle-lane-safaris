@@ -3,6 +3,7 @@ import { Search, MapPin, Calendar, Compass, MessageSquare, Sparkles, CheckCircle
 import { FilterState } from '../types';
 import { CONTACT_INFO } from '../data/safariData';
 import { tracker } from '../lib/tracker';
+import { JungleLaneLogo } from './JungleLaneLogo';
 
 interface HeroProps {
   onSearch: (filters: FilterState) => void;
@@ -29,7 +30,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onOpenQuoteModal, onOpenAI
   };
 
   return (
-    <div className="relative min-h-[88vh] flex items-center justify-center bg-[#3A4F41] overflow-hidden">
+    <div className="relative min-h-[88vh] flex items-center justify-center bg-[#143825] overflow-hidden">
       {/* High-Res Hero Image Background with Warm Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -39,15 +40,15 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onOpenQuoteModal, onOpenAI
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#3A4F41] via-transparent to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#143825] via-transparent to-black/50" />
       </div>
 
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 text-white w-full">
         <div className="max-w-3xl space-y-6">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#C86D51] px-4 py-1.5 rounded-sm text-[11px] font-bold uppercase tracking-widest text-white shadow-md">
-            <Compass className="w-4 h-4 animate-spin-slow text-amber-200" />
+          <div className="inline-flex items-center gap-2.5 bg-[#C86D51] px-3.5 py-1 rounded-sm text-[11px] font-bold uppercase tracking-widest text-white shadow-md">
+            <JungleLaneLogo size="xs" variant="emblem" theme="light" id="hero-badge-logo" />
             <span>LICENSED KENYA SAFARI OPERATOR</span>
           </div>
 

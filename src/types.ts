@@ -118,7 +118,7 @@ export interface TravelEvent {
     searchQuery?: string;
     filterType?: string;
     filterValue?: string;
-    linkType?: 'WhatsApp' | 'Phone' | 'Directions/Map' | 'Partner Lodge' | 'Park Permits' | 'Airline' | 'Other';
+    linkType?: 'WhatsApp' | 'Phone' | 'Email' | 'Directions/Map' | 'Partner Lodge' | 'Park Permits' | 'Airline' | 'Other';
     targetUrl?: string;
     pagePath?: string;
     price?: number;
@@ -178,7 +178,7 @@ export interface FilterUsageItem {
 export interface OutboundClickLog {
   id: string;
   entityName: string;
-  linkType: 'WhatsApp' | 'Phone' | 'Directions/Map' | 'Partner Lodge' | 'Park Permits' | 'Airline' | 'Other';
+  linkType: 'WhatsApp' | 'Phone' | 'Email' | 'Directions/Map' | 'Partner Lodge' | 'Park Permits' | 'Airline' | 'Other';
   targetUrl: string;
   deviceType: DeviceType;
   timestamp: string;
@@ -269,6 +269,75 @@ export interface AnalyticsEventDoc {
   target_entity_id: string;
   metadata?: Record<string, any>;
   timestamp: string;
+}
+
+// ==========================================
+// Car Hire & Fleet Services Interfaces
+// ==========================================
+
+export type VehicleCategory = 
+  | 'economy'
+  | 'saloon'
+  | 'suv'
+  | '4x4'
+  | 'vans-minibuses'
+  | 'luxury'
+  | 'safari-4x4'
+  | 'safari-van'
+  | 'executive-suv'
+  | 'group-bus';
+
+export interface CarHireCategoryItem {
+  id: string;
+  name: string;
+  category: VehicleCategory;
+  categoryLabel: string;
+  modelsExample?: string;
+  imageUrl: string;
+  shortDescription: string;
+  seats: string;
+  transmission: string;
+  driveType?: string;
+  fuelType?: string;
+  priceKES?: string;
+  tag?: string;
+}
+
+export interface CarHireVehicle {
+  id: string;
+  name: string;
+  category: VehicleCategory;
+  categoryLabel: string;
+  tag?: string;
+  seatingCapacity: number;
+  luggageCapacity: string;
+  transmission: 'Manual 4x4' | 'Automatic 4x4' | 'Manual' | 'Automatic' | string;
+  fuelType: 'Diesel' | 'Petrol' | string;
+  driveType: 'Full-Time 4WD' | 'Part-Time 4WD' | '4x2 / 2WD' | 'Rear-Wheel Drive' | string;
+  imageUrl: string;
+  secondaryImages?: string[];
+  shortDescription: string;
+  keyFeatures: string[];
+  safariEquipment: string[];
+  rentalOptions: ('Chauffeur-Driven' | 'Self-Drive' | 'Airport Transfers' | 'Cross-Border')[];
+  recommendedFor: string;
+  priceKES?: string;
+}
+
+export interface CarHireQuoteRequest {
+  vehicleId?: string;
+  vehicleName?: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  rentalType: 'Chauffeur-Driven' | 'Self-Drive' | 'Airport Transfer';
+  pickupDate: string;
+  returnDate: string;
+  pickupLocation: string;
+  destinationRoute: string;
+  passengersCount: number;
+  addOns?: string[];
+  specialRequests?: string;
 }
 
 

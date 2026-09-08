@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { X, Send, MessageSquare, CheckCircle2, Compass, Calendar, Users, MapPin } from 'lucide-react';
+import { X, Send, MessageSquare, CheckCircle2, Calendar, Users, MapPin } from 'lucide-react';
 import { CONTACT_INFO } from '../data/safariData';
 import { tracker } from '../lib/tracker';
+import { JungleLaneLogo } from './JungleLaneLogo';
 
 interface CustomQuoteModalProps {
   isOpen: boolean;
@@ -37,7 +38,8 @@ export const CustomQuoteModal: React.FC<CustomQuoteModalProps> = ({
     'Diani Beach (Coastal Kenya)',
     'Tsavo West & East',
     'Nairobi 1-Day Excursions',
-    'Ol Pejeta Rhino Conservancy'
+    'Ol Pejeta Rhino Conservancy',
+    '4x4 Safari Car Hire / Vehicle Rental'
   ];
 
   const handleParkToggle = (park: string) => {
@@ -133,11 +135,8 @@ Please provide a custom proposal!`;
         ) : (
           <div className="space-y-6">
             {/* Header */}
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#C86D51] uppercase tracking-wider">
-                <Compass className="w-4 h-4" />
-                <span>Tailor-Made Kenya Safaris</span>
-              </div>
+            <div className="space-y-2 border-b border-stone-100 pb-3">
+              <JungleLaneLogo size="sm" variant="horizontal" theme="dark" id="quote-modal-logo" />
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#222222]">
                 {preselectedPackage ? `Customize "${preselectedPackage}"` : 'Book a Custom Safari / Get Free Quote'}
               </h2>
