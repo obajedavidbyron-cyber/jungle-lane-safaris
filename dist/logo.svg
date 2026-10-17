@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 920" width="100%" height="100%">
+  <defs>
+    <style>
+      .brand-green { fill: #156D34; }
+      .brand-white { fill: #FFFFFF; }
+      .brand-stroke { stroke: #156D34; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .serif-title { font-family: 'Playfair Display', Georgia, serif; font-weight: 900; }
+      .sans-tagline { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-weight: 700; letter-spacing: 0.22em; }
+    </style>
+  </defs>
+
+  <!-- Africa Silhouette -->
+  <g id="africa-emblem">
+    <!-- Main Africa Continent -->
+    <path class="brand-green" d="
+      M 310,115
+      C 325,108 360,112 390,115
+      C 420,118 450,112 480,122
+      C 505,130 535,148 550,165
+      C 560,176 565,190 575,200
+      C 590,215 625,230 635,248
+      C 645,265 640,285 648,305
+      C 655,320 670,335 665,355
+      C 660,375 640,390 635,410
+      C 628,435 632,455 625,480
+      C 615,510 595,540 580,570
+      C 565,600 545,630 525,655
+      C 512,672 495,685 475,675
+      C 460,668 452,650 445,635
+      C 435,610 430,580 432,550
+      C 434,528 420,515 410,500
+      C 395,478 375,465 355,455
+      C 335,445 310,442 290,430
+      C 265,415 242,390 235,360
+      C 228,330 232,295 245,268
+      C 258,242 280,225 295,200
+      C 305,182 315,160 305,140
+      C 300,130 302,120 310,115 Z
+    " />
+
+    <!-- Madagascar Island -->
+    <path class="brand-green" d="
+      M 640,510
+      C 648,495 658,505 660,520
+      C 665,550 655,585 645,615
+      C 638,635 625,650 615,638
+      C 608,630 612,610 618,590
+      C 625,560 632,530 640,510 Z
+    " />
+
+    <!-- Lion Head in Africa (White Mane & Face with Green Accents) -->
+    <!-- Base White Flowing Mane & Face Profile -->
+    <path class="brand-white" d="
+      M 345,155
+      C 380,140 430,145 470,165
+      C 500,180 528,210 540,245
+      C 548,268 550,292 538,315
+      C 525,340 500,358 480,378
+      C 460,398 448,425 435,455
+      C 428,472 422,500 405,510
+      C 395,515 390,490 392,475
+      C 395,450 408,425 415,400
+      C 422,375 418,348 408,325
+      C 395,295 365,275 348,248
+      C 330,220 322,185 345,155 Z
+    " />
+
+    <!-- White Lion Mane Tufts Sweeping Backward -->
+    <path class="brand-white" d="
+      M 360,180
+      C 335,210 315,245 295,280
+      C 285,298 275,320 282,340
+      C 290,360 310,368 328,355
+      C 345,342 355,320 365,300
+      C 375,280 380,250 375,225
+      C 372,210 368,195 360,180 Z
+    " />
+
+    <path class="brand-white" d="
+      M 315,310
+      C 295,335 280,368 288,395
+      C 295,415 320,418 338,405
+      C 355,392 368,368 375,345
+      C 360,350 340,345 328,335
+      C 320,328 316,320 315,310 Z
+    " />
+
+    <!-- Lion Face Contour & Features (Forest Green Details) -->
+    <!-- Lion Eye & Brow -->
+    <path class="brand-green" d="
+      M 480,240
+      C 490,235 505,236 512,242
+      C 505,248 495,250 482,246
+      C 478,244 476,241 480,240 Z
+    " />
+    <circle cx="495" cy="242" r="3.5" fill="#156D34" />
+    <path d="M 470,232 C 485,225 505,228 520,236" fill="none" stroke="#156D34" stroke-width="4.5" stroke-linecap="round" />
+
+    <!-- Lion Muzzle & Nose -->
+    <path class="brand-green" d="
+      M 532,275
+      C 536,270 544,272 546,278
+      C 544,285 536,288 530,285
+      C 528,280 530,277 532,275 Z
+    " />
+    <!-- Whisker lines / Snout -->
+    <path d="M 515,278 C 525,282 535,283 545,282" fill="none" stroke="#156D34" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 505,288 C 518,292 530,294 540,290" fill="none" stroke="#156D34" stroke-width="3" stroke-linecap="round" />
+    <circle cx="518" cy="285" r="2" fill="#156D34" />
+    <circle cx="524" cy="286" r="2" fill="#156D34" />
+    <circle cx="514" cy="291" r="1.8" fill="#156D34" />
+    <circle cx="520" cy="292" r="1.8" fill="#156D34" />
+
+    <!-- Mouth & Chin Line -->
+    <path d="M 500,305 C 515,310 528,308 538,298" fill="none" stroke="#156D34" stroke-width="4" stroke-linecap="round" />
+    <path d="M 488,322 C 500,325 515,322 522,312" fill="none" stroke="#156D34" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Lion Ear -->
+    <path class="brand-green" d="
+      M 432,192
+      C 440,178 455,180 460,195
+      C 455,208 442,212 435,205
+      C 430,200 430,195 432,192 Z
+    " />
+
+    <!-- Mane Flow Strands (Green separation lines inside white mane) -->
+    <path d="M 410,185 C 430,205 442,235 448,265" fill="none" stroke="#156D34" stroke-width="4" stroke-linecap="round" />
+    <path d="M 380,210 C 405,235 420,270 425,305" fill="none" stroke="#156D34" stroke-width="4" stroke-linecap="round" />
+    <path d="M 360,250 C 385,280 398,315 402,355" fill="none" stroke="#156D34" stroke-width="4" stroke-linecap="round" />
+    <path d="M 350,300 C 370,335 385,375 388,415" fill="none" stroke="#156D34" stroke-width="4" stroke-linecap="round" />
+    <path d="M 445,340 C 452,370 455,400 448,435" fill="none" stroke="#156D34" stroke-width="4" stroke-linecap="round" />
+  </g>
+
+  <!-- Brand Typography -->
+  <g id="brand-text" text-anchor="middle">
+    <!-- JUNGLELANE -->
+    <text x="400" y="770" class="brand-green serif-title" font-size="64" letter-spacing="0.04em">
+      JUNGLELANE
+    </text>
+
+    <!-- SAFARIS -->
+    <text x="400" y="835" class="brand-green serif-title" font-size="52" letter-spacing="0.14em">
+      SAFARIS
+    </text>
+
+    <!-- EXPLORE AFRICA WITH AFRICANS -->
+    <text x="400" y="885" class="brand-green sans-tagline" font-size="20">
+      EXPLORE AFRICA WITH AFRICANS
+    </text>
+  </g>
+</svg>
